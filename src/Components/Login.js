@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const handleLogin = event =>{
-
+  const navigate = useNavigate();  
+  const handleLogin = event =>{
+         
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
@@ -17,20 +19,14 @@ const Login = () => {
         })
         .then(res => res.json())
         .then( data => {
+
+          if(data.success){
+            localStorage.setItem('accessToken', data.accessToken);
+            navigate('/order')
+          }
+          
           console.log(data);
         })
-
-        // fetch('http://localhost:5000/login', {
-        //     method: 'POST', // or 'PUT'
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({email, pass}),
-        //   })
-        //   .then((response) => response.json())
-        //   .then((data) => {
-        //     console.log(data);
-        //   })
     }
 
     return (
