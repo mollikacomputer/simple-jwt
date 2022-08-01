@@ -19,7 +19,7 @@ const Login = () => {
         })
         .then(res => res.json())
         .then( data => {
-
+          // accessToken save for local storage
           if(data.success){
             localStorage.setItem('accessToken', data.accessToken);
             navigate('/order')
